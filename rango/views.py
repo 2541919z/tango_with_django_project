@@ -11,15 +11,16 @@ from datetime import datetime
 def about(request):
     context_dict = {'name': 'Jiusi Zhao'}
     visitor_cookie_handler(request)
-    context_dict['message'] = "This tutorial has been put together by"
     context_dict['visits'] = request.session['visits']
-    return HttpResponse("Rango says here is the about page. <a href='/rango/'>Index</a>")
-    #return render(request, 'rango/about.html', context=context_dict);
+
+    return render(request, 'rango/about.html', context=context_dict);
 
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     pages = Page.objects.order_by('-views')[:5]
+
+    print(pages)
 
     context_dict = {}
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
@@ -29,7 +30,6 @@ def index(request):
     visitor_cookie_handler(request)
     response = render(request, 'rango/index.html', context=context_dict)
 
-    #return render(request, 'rango/index.html', context=context_dict)
     return response
 
 
@@ -61,7 +61,7 @@ def show_category(request, category_name_slug):
     return render(request, 'rango/category.html', context=context_dict)
 
 
-#@login_required
+@login_required
 def add_category(request):
     form = CategoryForm()
 
@@ -86,7 +86,7 @@ def add_category(request):
     return render(request, 'rango/add_category.html', {'form': form})
 
 
-#@login_required
+@login_required
 def add_page(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)

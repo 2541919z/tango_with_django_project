@@ -1,0 +1,28 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+About Rango
+{% endblock %}
+
+{% block body_block %}
+<h1>here is the about page.</h1>
+<div>
+    </br>
+    This tutorial has been put together by
+    <strong>{{ name }}</strong>
+</div>
+{% if user.is_authenticated %}
+    Hi {{ user.username }} Visits: {{visits}}
+    {% if visits > 1 %}
+        times
+    {% else %}
+        time
+    {% endif %}
+{% endif %}
+<div>
+    <img src="{{ MEDIA_URL }}cat.jpg"
+                 alt="Picture of a Cat.?"/>.
+</div>
+{% endblock %}
+

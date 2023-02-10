@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 
-
+#chapter 9
 def about(request):
     context_dict = {'name': 'Jiusi Zhao'}
     visitor_cookie_handler(request)

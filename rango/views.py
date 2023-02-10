@@ -19,7 +19,8 @@ def about(request):
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
     pages = Page.objects.order_by('-views')[:5]
-    
+
+    print(pages)
 
     context_dict = {}
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
@@ -60,7 +61,7 @@ def show_category(request, category_name_slug):
     return render(request, 'rango/category.html', context=context_dict)
 
 
-
+#@login_required
 def add_category(request):
     form = CategoryForm()
 
@@ -85,7 +86,7 @@ def add_category(request):
     return render(request, 'rango/add_category.html', {'form': form})
 
 
-
+#@login_required
 def add_page(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
